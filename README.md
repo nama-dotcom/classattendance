@@ -7,6 +7,7 @@ A clean, responsive, and lightweight **Class Attendance Tracker** web applicatio
 - **Add Attendance Records**: Record student attendance with student name, date, and status (Present / Absent).
 - **Edit & Update**: Modify any existing record with live form population and quick updates.
 - **Delete with Confirmation**: Safeguard against accidental deletion with a confirmation prompt.
+- **Date Filtering**: Filter attendance records by a specific day to view only that day's attendance, with an instant "Clear Date" button to view all days.
 - **Search & Filter**: Real-time search by student name with search term highlighting and status-based filtering (Present / Absent / All).
 - **Live Statistics**: Summary counters at the top showing total records, present count, and absent count.
 - **Friendly Empty State**: Helpful feedback when no records exist or when no search results match.
@@ -32,3 +33,4 @@ No installation, build tools, or backend servers are required.
 ## License
 
 MIT
+

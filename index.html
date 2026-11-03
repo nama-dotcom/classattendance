@@ -97,6 +97,25 @@
               <button type="button" id="clearSearchBtn" class="clear-btn" aria-label="Clear search" style="display: none;">&times;</button>
             </div>
             
+            <div class="date-filter-group">
+              <input 
+                type="date" 
+                id="dateFilter" 
+                class="filter-date" 
+                aria-label="Filter records by date" 
+                title="Filter by date"
+              >
+              <button 
+                type="button" 
+                id="clearDateBtn" 
+                class="clear-date-btn" 
+                aria-label="Clear date filter and show all dates" 
+                style="display: none;"
+              >
+                Clear Date
+              </button>
+            </div>
+
             <select id="statusFilter" class="filter-select" aria-label="Filter by status">
               <option value="All">All Statuses</option>
               <option value="Present">Present Only</option>

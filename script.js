@@ -22,6 +22,8 @@ const cancelEditBtn = document.getElementById('cancelEditBtn');
 
 const searchInput = document.getElementById('searchInput');
 const clearSearchBtn = document.getElementById('clearSearchBtn');
+const dateFilter = document.getElementById('dateFilter');
+const clearDateBtn = document.getElementById('clearDateBtn');
 const statusFilter = document.getElementById('statusFilter');
 
 const recordsContainer = document.getElementById('recordsContainer');
@@ -107,6 +109,34 @@ function setupEventListeners() {
 
   // Filter change
   statusFilter.addEventListener('change', renderApp);
+
+  // Date filter change
+  dateFilter.addEventListener('change', () => {
+    toggleClearDateBtn();
+    renderApp();
+  });
+  dateFilter.addEventListener('input', () => {
+    toggleClearDateBtn();
+    renderApp();
+  });
+
+  // Clear date filter button
+  clearDateBtn.addEventListener('click', () => {
+    dateFilter.value = '';
+    toggleClearDateBtn();
+    renderApp();
+  });
+}
+
+/**
+ * Toggle visibility of the clear date button
+ */
+function toggleClearDateBtn() {
+  if (dateFilter.value) {
+    clearDateBtn.style.display = 'inline-flex';
+  } else {
+    clearDateBtn.style.display = 'none';
+  }
 }
 
 /**
@@ -292,18 +322,22 @@ function updateStats() {
 }
 
 /**
- * Filter records based on search query and status filter
+ * Filter records based on search query, date filter, and status filter
  */
 function getFilteredRecords() {
   const searchQuery = searchInput.value.trim().toLowerCase();
   const selectedStatus = statusFilter.value;
+  const selectedDate = dateFilter.value;
 
   return attendanceRecords.filter((record) => {
     const matchesSearch =
       searchQuery === '' || record.name.toLowerCase().includes(searchQuery);
     const matchesStatus =
       selectedStatus === 'All' || record.status === selectedStatus;
-    return matchesSearch && matchesStatus;
+    const matchesDate =
+      !selectedDate || record.date === selectedDate;
+
+    return matchesSearch && matchesStatus && matchesDate;
   });
 }
 
@@ -316,6 +350,7 @@ function renderApp() {
   const filteredRecords = getFilteredRecords();
   const searchQuery = searchInput.value.trim();
   const selectedStatus = statusFilter.value;
+  const selectedDate = dateFilter.value;
 
   // Clear existing rendered items
   recordsContainer.innerHTML = '';
@@ -331,9 +366,18 @@ function renderApp() {
 
   if (filteredRecords.length === 0) {
     emptyTitle.textContent = 'No matching records found';
-    emptyMessage.textContent = `No attendance records match your search "${searchQuery}" ${
-      selectedStatus !== 'All' ? `with status "${selectedStatus}"` : ''
-    }.`;
+
+    const conditions = [];
+    if (searchQuery) conditions.push(`name "${searchQuery}"`);
+    if (selectedDate) conditions.push(`date "${formatDate(selectedDate)}"`);
+    if (selectedStatus !== 'All') conditions.push(`status "${selectedStatus}"`);
+
+    if (conditions.length > 0) {
+      emptyMessage.textContent = `No attendance records match ${conditions.join(', ')}.`;
+    } else {
+      emptyMessage.textContent = 'No attendance records match your filter criteria.';
+    }
+
     emptyState.style.display = 'block';
     recordsContainer.style.display = 'none';
     return;

@@ -301,6 +301,40 @@ select:focus {
   cursor: pointer;
 }
 
+.date-filter-group {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.filter-date {
+  width: auto;
+  min-width: 155px;
+  cursor: pointer;
+}
+
+.clear-date-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f1f5f9;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.65rem 0.75rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: var(--transition);
+  font-family: inherit;
+}
+
+.clear-date-btn:hover {
+  background-color: #e2e8f0;
+  color: var(--text-main);
+}
+
 /* Records Container */
 .records-container {
   display: flex;
@@ -509,6 +543,20 @@ mark.search-highlight {
 
   .controls-wrapper {
     flex-direction: column;
+  }
+
+  .date-filter-group {
+    width: 100%;
+  }
+
+  .filter-date {
+    flex: 1;
+    width: 100%;
+  }
+
+  .clear-date-btn {
+    padding: 0.65rem 0.85rem;
+    font-size: 0.85rem;
   }
 
   .filter-select {
