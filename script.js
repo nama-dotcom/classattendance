@@ -32,6 +32,9 @@ const emptyState = document.getElementById('emptyState');
 const emptyTitle = document.getElementById('emptyTitle');
 const emptyMessage = document.getElementById('emptyMessage');
 
+const formCard = document.querySelector('.form-card');
+const listCard = document.querySelector('.list-card');
+
 const totalCountEl = document.getElementById('totalCount');
 const presentCountEl = document.getElementById('presentCount');
 const absentCountEl = document.getElementById('absentCount');
@@ -43,7 +46,35 @@ document.addEventListener('DOMContentLoaded', () => {
   setupEventListeners();
   toggleClearDateBtn();
   renderApp();
+  syncLogHeight();
+  observeFormHeight();
 });
+
+/**
+ * Keeps the Attendance Log frame at least as tall as the form frame
+ * on the two-column layout, while still growing as records are added.
+ */
+function syncLogHeight() {
+  if (!formCard || !listCard) return;
+
+  if (window.matchMedia('(max-width: 860px)').matches) {
+    listCard.style.minHeight = '';
+    return;
+  }
+
+  listCard.style.minHeight = `${formCard.offsetHeight}px`;
+}
+
+/**
+ * Re-syncs the log height whenever the form frame changes size
+ * (e.g. entering edit mode or resizing the window).
+ */
+function observeFormHeight() {
+  if (formCard && 'ResizeObserver' in window) {
+    new ResizeObserver(syncLogHeight).observe(formCard);
+  }
+  window.addEventListener('resize', syncLogHeight);
+}
 
 /**
  * Sets the date input to today's date in YYYY-MM-DD format
