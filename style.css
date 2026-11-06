@@ -307,6 +307,38 @@ select:focus {
   gap: 0.4rem;
 }
 
+.date-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.date-placeholder {
+  position: absolute;
+  left: 0.75rem;
+  color: var(--text-muted);
+  pointer-events: none;
+  display: none;
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+.date-input-wrap.is-empty .date-placeholder {
+  display: inline;
+}
+
+.date-input-wrap.is-empty .filter-date {
+  color: transparent;
+}
+
+.date-input-wrap.is-empty .filter-date:focus {
+  color: inherit;
+}
+
+.date-input-wrap.is-empty:focus-within .date-placeholder {
+  display: none;
+}
+
 .filter-date {
   width: auto;
   min-width: 155px;

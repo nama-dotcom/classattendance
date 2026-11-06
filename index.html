@@ -98,13 +98,16 @@
             </div>
             
             <div class="date-filter-group">
-              <input 
-                type="date" 
-                id="dateFilter" 
-                class="filter-date" 
-                aria-label="Filter records by date" 
-                title="Filter by date"
-              >
+              <div class="date-input-wrap">
+                <input 
+                  type="date" 
+                  id="dateFilter" 
+                  class="filter-date" 
+                  aria-label="Filter records by date" 
+                  title="Filter by date"
+                >
+                <span class="date-placeholder" id="datePlaceholder">dd/mm/yy</span>
+              </div>
               <button 
                 type="button" 
                 id="clearDateBtn" 
@@ -117,7 +120,7 @@
             </div>
 
             <select id="statusFilter" class="filter-select" aria-label="Filter by status">
-              <option value="All">All Statuses</option>
+              <option value="All">All Status</option>
               <option value="Present">Present Only</option>
               <option value="Absent">Absent Only</option>
             </select>

@@ -23,6 +23,7 @@ const cancelEditBtn = document.getElementById('cancelEditBtn');
 const searchInput = document.getElementById('searchInput');
 const clearSearchBtn = document.getElementById('clearSearchBtn');
 const dateFilter = document.getElementById('dateFilter');
+const dateInputWrap = dateFilter ? dateFilter.closest('.date-input-wrap') : null;
 const clearDateBtn = document.getElementById('clearDateBtn');
 const statusFilter = document.getElementById('statusFilter');
 
@@ -40,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
   loadRecords();
   setDefaultDate();
   setupEventListeners();
+  toggleClearDateBtn();
   renderApp();
 });
 
@@ -132,6 +134,9 @@ function setupEventListeners() {
  * Toggle visibility of the clear date button
  */
 function toggleClearDateBtn() {
+  if (dateInputWrap) {
+    dateInputWrap.classList.toggle('is-empty', !dateFilter.value);
+  }
   if (dateFilter.value) {
     clearDateBtn.style.display = 'inline-flex';
   } else {
