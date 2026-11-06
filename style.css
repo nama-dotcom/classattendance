@@ -172,6 +172,7 @@ input[type="text"],
 input[type="date"],
 select {
   width: 100%;
+  min-height: 2.75rem;
   padding: 0.65rem 0.85rem;
   font-size: 0.95rem;
   font-family: inherit;
@@ -183,6 +184,18 @@ select {
   transition: var(--transition);
   -webkit-appearance: none;
   appearance: none;
+}
+
+input[type="date"]::-webkit-date-and-time-value {
+  text-align: left;
+}
+
+/* iOS Safari aligns date input text/height more reliably as a flex box */
+@supports (-webkit-touch-callout: none) {
+  input[type="date"] {
+    display: flex;
+    align-items: center;
+  }
 }
 
 select {
@@ -311,6 +324,8 @@ select:focus {
   position: relative;
   display: flex;
   align-items: center;
+  flex: 1;
+  min-width: 0;
 }
 
 .date-placeholder {
@@ -340,7 +355,7 @@ select:focus {
 }
 
 .filter-date {
-  width: auto;
+  width: 100%;
   min-width: 155px;
   cursor: pointer;
 }
@@ -349,6 +364,7 @@ select:focus {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  min-height: 2.75rem;
   background-color: #f1f5f9;
   border: 1px solid var(--border-color);
   color: var(--text-secondary);
@@ -579,11 +595,17 @@ mark.search-highlight {
 
   .date-filter-group {
     width: 100%;
+    align-items: stretch;
+  }
+
+  .date-input-wrap {
+    width: 100%;
   }
 
   .filter-date {
     flex: 1;
     width: 100%;
+    min-height: 2.75rem;
   }
 
   .clear-date-btn {
